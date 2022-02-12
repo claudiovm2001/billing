@@ -1,6 +1,7 @@
 # billing
 A simple automated billing system
 
-##TODO
+## TODO
   - Histórico
   - Login
+  - GUI

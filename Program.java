@@ -16,21 +16,22 @@ public class Program {
 
 
         //Capturar dados do produto atual:
-        System.out.println("\n\nInsira os dados do produto: \n");
+        System.out.println("Insira os dados do produto: ");
+        System.out.println();
 
             System.out.print("    - Código: ");
             code = keyboard.nextInt();
             keyboard.nextLine();
 
-            System.out.print("\n    - Nome: ");
+            System.out.print("    - Nome: ");
             name = keyboard.next();
             keyboard.nextLine();
 
-            System.out.print("\n    - Preço: ");
+            System.out.print("    - Preço: ");
             price = keyboard.nextFloat();
             keyboard.nextLine();
 
-            System.out.print("\n    - Quantidade: ");
+            System.out.print("    - Quantidade: ");
             quantity = keyboard.nextInt();
             keyboard.nextLine();
 
@@ -41,12 +42,16 @@ public class Program {
 
     public void review (List<Item> l) {
 
-        System.out.println("\n**REVISAR**");
+        System.out.println("**REVISAR**");
+        System.out.println();
+
         for (Item item: l){
             System.out.println("    *"+item.getName()+":");
                 System.out.println("        - COD "+item.getCode());
                 System.out.println("        - $"+item.getPrice());
                 System.out.println("        - x"+item.getQuantity());
+            
+            System.out.println();
         }
 
 
@@ -63,7 +68,7 @@ public class Program {
 
         //Texto de cabeçalho ("título") da aplicação
         String header = "||Sistema de faturamento automático||";
-        System.out.println("\n"+header);
+        System.out.println(header);
 
 
         List<Item> items;
@@ -77,12 +82,13 @@ public class Program {
             System.out.print("\033[H\033[2J");  
             System.out.flush();
 
-            System.out.println("\n"+header);
+            System.out.println(header);
+            System.out.println(); System.out.println(); System.out.println();
 
             Item item = insert();
             items.add(item);
 
-
+            System.out.println();
             System.out.println("Finalizar? (s)");
             char choice = 'n';
             try {
@@ -101,7 +107,8 @@ public class Program {
         System.out.print("\033[H\033[2J");  
         System.out.flush();
 
-        System.out.println("\n"+header);
+        System.out.println(header);
+        System.out.println(); System.out.println(); System.out.println();
 
         review(items);
 

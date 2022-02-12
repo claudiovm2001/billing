@@ -14,7 +14,6 @@ public class Program {
         float price;
         int quantity;
 
-        System.out.println("\n||Sistema de faturamento automático||");
 
         //Capturar dados do produto atual:
         System.out.println("\n\nInsira os dados do produto: \n");
@@ -42,8 +41,6 @@ public class Program {
 
     public void review (List<Item> l) {
 
-        System.out.println("\n||Sistema de faturamento automático||");
-
         System.out.println("\n**REVISAR**");
         for (Item item: l){
             System.out.println("    *"+item.getName()+":");
@@ -55,7 +52,10 @@ public class Program {
 
     public Boolean start(){
 
-        System.out.println("\n||Sistema de faturamento automático||");
+        //Texto de cabeçalho ("título") da aplicação
+        String header = "||Sistema de faturamento automático||";
+        System.out.println("\n"+header);
+
 
         List<Item> items;
         items = new ArrayList<Item>();
@@ -68,7 +68,8 @@ public class Program {
             System.out.print("\033[H\033[2J");  
             System.out.flush();
 
-            
+            System.out.println("\n"+header);
+
             Item item = insert();
             items.add(item);
 
@@ -86,11 +87,12 @@ public class Program {
                 e.printStackTrace();
             }
 
+        }
+        
         System.out.print("\033[H\033[2J");  
         System.out.flush();
 
-        }
-        
+        System.out.println("\n"+header);
 
         review(items);
 

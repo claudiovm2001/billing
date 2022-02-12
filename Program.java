@@ -14,6 +14,9 @@ public class Program {
         float price;
         int quantity;
 
+        System.out.println("\n||Sistema de faturamento automático||");
+
+        //Capturar dados do produto atual:
         System.out.println("\n\nInsira os dados do produto: \n");
 
             System.out.print("    - Código: ");
@@ -32,8 +35,6 @@ public class Program {
             quantity = keyboard.nextInt();
             keyboard.nextLine();
 
-        System.out.print("\033[H\033[2J");  
-        System.out.flush();
 
         Item item = new Item(code, name, price, quantity);
         return item;
@@ -41,11 +42,14 @@ public class Program {
 
     public void review (List<Item> l) {
 
+        System.out.println("\n||Sistema de faturamento automático||");
+
+        System.out.println("\n**REVISAR**");
         for (Item item: l){
-            System.out.println(item.getName()+":");
-                System.out.println("    - COD "+item.getCode());
-                System.out.println("    - $"+item.getPrice());
-                System.out.println("    - x"+item.getQuantity());
+            System.out.println("    *"+item.getName()+":");
+                System.out.println("        - COD "+item.getCode());
+                System.out.println("        - $"+item.getPrice());
+                System.out.println("        - x"+item.getQuantity());
         }
     }
 
@@ -56,10 +60,15 @@ public class Program {
         List<Item> items;
         items = new ArrayList<Item>();
 
-
+        //Populando lista de itens, só será finalizado se solicitado
         Boolean loop = true;
         while(loop){
 
+            //Limpar tela
+            System.out.print("\033[H\033[2J");  
+            System.out.flush();
+
+            
             Item item = insert();
             items.add(item);
 

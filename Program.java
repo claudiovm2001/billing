@@ -1,3 +1,6 @@
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class Program {
@@ -29,25 +32,58 @@ public class Program {
             quantity = keyboard.nextInt();
             keyboard.nextLine();
 
+        System.out.print("\033[H\033[2J");  
+        System.out.flush();
+
         Item item = new Item(code, name, price, quantity);
         return item;
     }
 
-    public void Review(){
+    public void review (List<Item> l) {
 
+        for (Item item: l){
+            System.out.println(item.getName()+":");
+                System.out.println("    - COD "+item.getCode());
+                System.out.println("    - $"+item.getPrice());
+                System.out.println("    - x"+item.getQuantity());
+        }
     }
 
     public Boolean start(){
 
         System.out.println("\n||Sistema de faturamento automático||");
 
-        Item item = insert();
+        List<Item> items;
+        items = new ArrayList<Item>();
 
-        System.out.println("\n\n\n"+item.getCode() +"\n"+ 
-                                    item.getName() +"\n"+ 
-                                    item.getPrice() +"\n"+ 
-                                    item.getQuantity()
-        );
+
+        Boolean loop = true;
+        while(loop){
+
+            Item item = insert();
+            items.add(item);
+
+
+            System.out.println("Finalizar? (s)");
+            char choice = 'n';
+            try {
+                choice = (char) System.in.read();
+
+                if (choice == 's'){
+                    loop = false;
+                }
+            } catch (IOException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+
+        System.out.print("\033[H\033[2J");  
+        System.out.flush();
+
+        }
+        
+
+        review(items);
 
         return true;
     }

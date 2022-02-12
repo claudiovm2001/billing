@@ -4,7 +4,7 @@ public class Item {
     private float price;
     private int quantity;
 
-    public Item(int code, String name, float price, int quantity){
+    public Item (int code, String name, float price, int quantity){
         this.code = code;
         this.name = name;
         this.price = price;

@@ -48,6 +48,15 @@ public class Program {
                 System.out.println("        - $"+item.getPrice());
                 System.out.println("        - x"+item.getQuantity());
         }
+
+
+        //Cálculo de valor total (preço * quantidade)
+        float total = 0;
+        for (Item item: l){
+            total += (item.getPrice() * item.getQuantity());
+        }
+
+        System.out.println("TOTAL: $"+total);
     }
 
     public Boolean start(){

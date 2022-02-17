@@ -6,6 +6,3 @@ A simple automated billing system for general commerce (stores, supermarkets, co
 Um simples sistema de faturamento para comércio em geral (mercados, mercearias, lojas)
 
 OBS.: For now, this software is operated through command-line. || Por ora, este software é operado por linha de comando.
-
-⚠⚠⚠ THIS PROJECT IS CURRENTLY A WORK IN PROGRESS / 
-ESTE PROJETO ESTÁ ATUALMENTE EM CONSTRUÇÃO ⚠⚠⚠

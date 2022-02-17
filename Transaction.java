@@ -30,8 +30,8 @@ public class Transaction {
 
             System.out.println();
             System.out.println("Finalizar? (s)");
-            choice = keyboard.next();
-            keyboard.reset();
+            choice = keyboard.nextLine();
+            keyboard.nextLine();
             
         
             if (choice.toLowerCase().equals("s")){
@@ -67,33 +67,33 @@ public class Transaction {
             try {
                 code = keyboard.nextInt();
             } catch (InputMismatchException e) {
-                System.out.print("VALOR INVÁLIDO!");
+                System.out.print("VALOR INVÁLIDO!\n");
                 code = 0;
             }
-            keyboard.reset();
+            keyboard.nextLine();
 
             System.out.print("    - Nome: ");
-            name = keyboard.next();
-            keyboard.reset();
+            name = keyboard.nextLine();
+            keyboard.nextLine();
 
             System.out.print("    - Preço: ");
             try {
                 price = keyboard.nextFloat();
             } catch (InputMismatchException e) {
-                System.out.println("VALOR INVÁLIDO!");
+                System.out.println("VALOR INVÁLIDO!\n");
                 price = 0;
             }
-            keyboard.reset();
+            keyboard.nextLine();
 
             System.out.print("    - Quantidade: ");
             try {
                 quantity = keyboard.nextInt();
             } catch (InputMismatchException e) {
-                System.out.println("VALOR INVÁLIDO!");
+                System.out.println("VALOR INVÁLIDO!\n");
                 quantity = 0;
             }
             
-            keyboard.reset();
+            keyboard.nextLine();
 
         Item item = new Item(code, name, price, quantity);
         this.items.add(item);

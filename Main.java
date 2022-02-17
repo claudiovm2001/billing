@@ -18,8 +18,8 @@ public class Main {
             String choice = "n";
 
             System.out.println("\n|FECHAR CAIXA? (s)|");
-            choice = keyboard.next();
-            keyboard.reset();            
+            choice = keyboard.nextLine();
+            keyboard.nextLine();            
 
             if (choice.toLowerCase().equals("s")){
                 loop = false;

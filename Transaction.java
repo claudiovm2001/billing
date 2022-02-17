@@ -1,5 +1,5 @@
-import java.io.IOException;
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 
@@ -20,7 +20,7 @@ public class Transaction {
             System.out.print("\033[H\033[2J");  
             System.out.flush();
 
-            System.out.println(Program.header);
+            System.out.println(Main.header);
             System.out.println(); System.out.println(); System.out.println();
 
             insert();
@@ -34,7 +34,7 @@ public class Transaction {
             keyboard.reset();
             
         
-            if (choice.equals("s")){
+            if (choice.toLowerCase().equals("s")){
                 loop = false;
             }
             
@@ -43,7 +43,7 @@ public class Transaction {
         System.out.print("\033[H\033[2J");  
             System.out.flush();
 
-        System.out.println(Program.header);
+        System.out.println(Main.header);
         System.out.println(); System.out.println();
 
         review();
@@ -64,7 +64,12 @@ public class Transaction {
         System.out.println();
 
             System.out.print("    - Código: ");
-            code = keyboard.nextInt();
+            try {
+                code = keyboard.nextInt();
+            } catch (InputMismatchException e) {
+                System.out.print("VALOR INVÁLIDO!");
+                code = 0;
+            }
             keyboard.reset();
 
             System.out.print("    - Nome: ");
@@ -72,11 +77,22 @@ public class Transaction {
             keyboard.reset();
 
             System.out.print("    - Preço: ");
-            price = keyboard.nextFloat();
+            try {
+                price = keyboard.nextFloat();
+            } catch (InputMismatchException e) {
+                System.out.println("VALOR INVÁLIDO!");
+                price = 0;
+            }
             keyboard.reset();
 
             System.out.print("    - Quantidade: ");
-            quantity = keyboard.nextInt();
+            try {
+                quantity = keyboard.nextInt();
+            } catch (InputMismatchException e) {
+                System.out.println("VALOR INVÁLIDO!");
+                quantity = 0;
+            }
+            
             keyboard.reset();
 
         Item item = new Item(code, name, price, quantity);

@@ -6,10 +6,12 @@ import java.util.Scanner;
 public class Transaction {
     
     private List<Item> items;
+    private Scanner keyboard;
 
     public void begin(){
         
         this.items = new ArrayList<Item>();
+        keyboard = new Scanner(System.in);
 
         Boolean loop = true;
         while(loop){
@@ -23,19 +25,19 @@ public class Transaction {
 
             insert();
 
+        
+            String choice = "n";
+
             System.out.println();
             System.out.println("Finalizar? (s)");
-            char choice = 'n';
-            try {
-                choice = (char) System.in.read();
-
-                if (choice == 's'){
-                    loop = false;
-                }
-            } catch (IOException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
+            choice = keyboard.next();
+            keyboard.reset();
+            
+        
+            if (choice.equals("s")){
+                loop = false;
             }
+            
         }
 
         System.out.print("\033[H\033[2J");  
@@ -50,7 +52,7 @@ public class Transaction {
 
     public void insert(){
 
-        Scanner keyboard = new Scanner(System.in);
+        //Scanner keyboard = new Scanner(System.in);
 
         int code;
         String name;
@@ -63,19 +65,19 @@ public class Transaction {
 
             System.out.print("    - Código: ");
             code = keyboard.nextInt();
-            keyboard.nextLine();
+            keyboard.reset();
 
             System.out.print("    - Nome: ");
             name = keyboard.next();
-            keyboard.nextLine();
+            keyboard.reset();
 
             System.out.print("    - Preço: ");
             price = keyboard.nextFloat();
-            keyboard.nextLine();
+            keyboard.reset();
 
             System.out.print("    - Quantidade: ");
             quantity = keyboard.nextInt();
-            keyboard.nextLine();
+            keyboard.reset();
 
         Item item = new Item(code, name, price, quantity);
         this.items.add(item);

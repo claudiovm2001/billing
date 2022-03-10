@@ -1,9 +1,12 @@
 public class User {
 	
-	private String login;
+	private String username;
 	private String password;
 	
-	public void Login() {
+	public static boolean Login(String login, String passcode) {
 		
+		if(login.equals("admin") && passcode.equals("passwd")) return true;
+		
+		return false;
 	}
 }

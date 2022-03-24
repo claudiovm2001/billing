@@ -9,6 +9,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.JList;
+import java.awt.Color;
+import javax.swing.JButton;
+import javax.swing.border.LineBorder;
 
 public class ReviewUI {
 
@@ -56,6 +59,7 @@ public class ReviewUI {
 		frmSyspvc.getContentPane().setLayout(null);
 		
 		JLabel lblHeader = new JLabel("Revisar");
+		lblHeader.setForeground(Color.BLUE);
 		lblHeader.setFont(new Font("Tahoma", Font.BOLD, 20));
 		lblHeader.setHorizontalAlignment(SwingConstants.CENTER);
 		lblHeader.setBounds(354, 38, 76, 25);
@@ -85,40 +89,56 @@ public class ReviewUI {
 		
 		JLabel lblColumn_2 = new JLabel("nome:");
 		lblColumn_2.setFont(new Font("Tahoma", Font.ITALIC, 11));
-		lblColumn_2.setBounds(301, 137, 46, 14);
+		lblColumn_2.setBounds(152, 134, 46, 14);
 		frmSyspvc.getContentPane().add(lblColumn_2);
 		
 		JLabel lblColumn_1 = new JLabel("cod:");
 		lblColumn_1.setFont(new Font("Tahoma", Font.ITALIC, 11));
-		lblColumn_1.setBounds(199, 137, 46, 14);
+		lblColumn_1.setBounds(50, 134, 46, 14);
 		frmSyspvc.getContentPane().add(lblColumn_1);
 		
 		JLabel lblColumn_3 = new JLabel("preco:");
 		lblColumn_3.setFont(new Font("Tahoma", Font.ITALIC, 11));
-		lblColumn_3.setBounds(403, 137, 46, 14);
+		lblColumn_3.setBounds(254, 134, 46, 14);
 		frmSyspvc.getContentPane().add(lblColumn_3);
 		
 		JLabel lblColumn_4 = new JLabel("qtd:");
 		lblColumn_4.setFont(new Font("Tahoma", Font.ITALIC, 11));
-		lblColumn_4.setBounds(505, 137, 46, 14);
+		lblColumn_4.setBounds(356, 134, 46, 14);
 		frmSyspvc.getContentPane().add(lblColumn_4);
 
 		
 		
 		JList listItems_name = new JList(names);
-		listItems_name.setBounds(301, 152, 92, 359);
+		listItems_name.setBounds(152, 149, 92, 389);
 		frmSyspvc.getContentPane().add(listItems_name);
 		
 		JList listItems_cod = new JList(codes);
-		listItems_cod.setBounds(199, 152, 92, 359);
+		listItems_cod.setBounds(50, 149, 92, 389);
 		frmSyspvc.getContentPane().add(listItems_cod);
 		
 		JList listItems_price = new JList(prices);
-		listItems_price.setBounds(403, 152, 92, 359);
+		listItems_price.setBounds(254, 149, 92, 389);
 		frmSyspvc.getContentPane().add(listItems_price);
 		
 		JList listItems_amount = new JList(amounts);
-		listItems_amount.setBounds(505, 152, 92, 359);
+		listItems_amount.setBounds(356, 149, 92, 389);
 		frmSyspvc.getContentPane().add(listItems_amount);
+		
+		JButton btnNewButton = new JButton("Finalizar");
+		btnNewButton.setBounds(636, 227, 89, 23);
+		frmSyspvc.getContentPane().add(btnNewButton);
+		
+		JButton btnNewButton_1 = new JButton("Cancelar");
+		btnNewButton_1.setBounds(533, 227, 89, 23);
+		frmSyspvc.getContentPane().add(btnNewButton_1);
+		
+		JLabel lblNewLabel = new JLabel("A\u00E7\u00F5es");
+		lblNewLabel.setBorder(new LineBorder(new Color(0, 0, 0), 1, true));
+		lblNewLabel.setForeground(Color.MAGENTA);
+		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 12));
+		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel.setBounds(603, 186, 46, 14);
+		frmSyspvc.getContentPane().add(lblNewLabel);
 	}
 }

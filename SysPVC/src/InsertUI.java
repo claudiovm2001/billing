@@ -10,6 +10,7 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 import java.awt.event.ActionEvent;
+import java.awt.Color;
 
 public class InsertUI {
 
@@ -55,6 +56,7 @@ public class InsertUI {
 		frmSyspvc.getContentPane().setLayout(null);
 		
 		JLabel lblHeader = new JLabel("Inserir");
+		lblHeader.setForeground(Color.BLUE);
 		lblHeader.setFont(new Font("Tahoma", Font.BOLD, 20));
 		lblHeader.setHorizontalAlignment(SwingConstants.CENTER);
 		lblHeader.setBounds(172, 25, 69, 20);
@@ -129,6 +131,12 @@ public class InsertUI {
 						);
 				
 				func.insertProduct(product, trsc);
+				
+				
+				textCod.setText("");
+				textNome.setText("");
+				textPreco.setText("");
+				textQtd.setText("");
 			}
 		});
 		btnInserir.setBounds(122, 211, 89, 23);

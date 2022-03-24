@@ -70,6 +70,8 @@ public class ReviewUI {
 		lblHeader_2.setBounds(217, 88, 361, 25);
 		frmSyspvc.getContentPane().add(lblHeader_2);
 		
+		
+		//PREPARAÇÃO DA LISTA:
 		String[] codes = new String[this.items.size()];
 		String[] names = new String[this.items.size()];
 		String[] prices = new String[this.items.size()];
@@ -109,6 +111,7 @@ public class ReviewUI {
 
 		
 		
+		//PREENCHIMENTO DA LISTA:
 		JList listItems_name = new JList(names);
 		listItems_name.setBounds(152, 149, 92, 389);
 		frmSyspvc.getContentPane().add(listItems_name);
@@ -125,20 +128,36 @@ public class ReviewUI {
 		listItems_amount.setBounds(356, 149, 92, 389);
 		frmSyspvc.getContentPane().add(listItems_amount);
 		
-		JButton btnNewButton = new JButton("Finalizar");
-		btnNewButton.setBounds(636, 227, 89, 23);
-		frmSyspvc.getContentPane().add(btnNewButton);
+		JButton btnSubmit = new JButton("Finalizar");
+		btnSubmit.setBounds(638, 359, 89, 23);
+		frmSyspvc.getContentPane().add(btnSubmit);
 		
-		JButton btnNewButton_1 = new JButton("Cancelar");
-		btnNewButton_1.setBounds(533, 227, 89, 23);
-		frmSyspvc.getContentPane().add(btnNewButton_1);
+		JButton btnCancel = new JButton("Cancelar");
+		btnCancel.setBounds(535, 359, 89, 23);
+		frmSyspvc.getContentPane().add(btnCancel);
 		
-		JLabel lblNewLabel = new JLabel("A\u00E7\u00F5es");
-		lblNewLabel.setBorder(new LineBorder(new Color(0, 0, 0), 1, true));
-		lblNewLabel.setForeground(Color.MAGENTA);
-		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 12));
-		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel.setBounds(603, 186, 46, 14);
-		frmSyspvc.getContentPane().add(lblNewLabel);
+		
+		JLabel lblResult = new JLabel("TOTAL A PAGAR:");
+		lblResult.setBorder(new LineBorder(new Color(0, 0, 0), 1, true));
+		lblResult.setForeground(Color.MAGENTA);
+		lblResult.setFont(new Font("Tahoma", Font.BOLD, 12));
+		lblResult.setHorizontalAlignment(SwingConstants.CENTER);
+		lblResult.setBounds(576, 188, 105, 14);
+		frmSyspvc.getContentPane().add(lblResult);
+		
+		
+		//CÁLCULO DE VALOR FINAL
+		float total = 0;			
+		
+		for (Product product : this.items) {
+			total += product.getPrice() * product.getAmount();
+		}
+		
+		
+		JLabel lblResult_value = new JLabel("R$ "+total);
+		lblResult_value.setFont(new Font("Dialog", Font.BOLD, 20));
+		lblResult_value.setBorder(new LineBorder(Color.RED, 2));
+		lblResult_value.setBounds(535, 236, 192, 57);
+		frmSyspvc.getContentPane().add(lblResult_value);
 	}
 }

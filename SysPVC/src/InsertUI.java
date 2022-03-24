@@ -111,15 +111,7 @@ public class InsertUI {
 				
 				ArrayList<Product> items = trsc.getItems();
 				
-				for (Product product : items) {
-					System.out.println(
-							product.getCode()+", "+
-						    product.getName()+", "+
-						    product.getPrice()+", "+
-						    product.getAmount());
-				}
-				
-				ReviewUI.main(null);
+				ReviewUI.main(items);
 			}
 		});
 		btnFinalizar.setBounds(215, 211, 89, 23);

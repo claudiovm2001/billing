@@ -5,8 +5,8 @@ public class Employee extends User {
 		// TODO Auto-generated constructor stub
 	}
 
-	public void insertProduct(int cod, String nome, float preco, int qtd) {
-		System.out.print(cod +" "+ nome +" "+ preco +" "+ qtd);
+	public void insertProduct(Product product, Transaction trsc) {
+		trsc.insert(product);
 	}
 	
 	public void review() {

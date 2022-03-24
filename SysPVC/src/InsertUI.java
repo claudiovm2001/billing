@@ -7,6 +7,8 @@ import java.awt.Font;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.List;
 import java.awt.event.ActionEvent;
 
 public class InsertUI {
@@ -37,13 +39,15 @@ public class InsertUI {
 	 * Create the application.
 	 */
 	public InsertUI() {
-		initialize();
+		Employee func = new Employee("func1","senha1");
+		Transaction trsc = new Transaction();
+		initialize(trsc, func);
 	}
 
 	/**
 	 * Initialize the contents of the frame.
 	 */
-	private void initialize() {
+	private void initialize(Transaction trsc, Employee func) {
 		frmSyspvc = new JFrame();
 		frmSyspvc.setTitle("SysPVC");
 		frmSyspvc.setBounds(100, 100, 450, 300);
@@ -102,6 +106,20 @@ public class InsertUI {
 		frmSyspvc.getContentPane().add(lblInput_4);
 		
 		JButton btnFinalizar = new JButton("Finalizar");
+		btnFinalizar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				ArrayList<Product> items = trsc.getItems();
+				
+				for (Product product : items) {
+					System.out.println(
+							product.getCode()+", "+
+						    product.getName()+", "+
+						    product.getPrice()+", "+
+						    product.getAmount());
+				}
+			}
+		});
 		btnFinalizar.setBounds(215, 211, 89, 23);
 		frmSyspvc.getContentPane().add(btnFinalizar);
 		
@@ -109,15 +127,14 @@ public class InsertUI {
 		btnInserir.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				Employee func = new Employee("func1","senha1");
+				Product product = new Product(
+							Integer.parseInt(textCod.getText()),
+							textNome.getText(),
+							Float.parseFloat(textPreco.getText()),
+							Integer.parseInt(textQtd.getText()) 
+						);
 				
-				int cod = Integer.parseInt(textCod.getText());
-				String nome = textNome.getText();
-				Float preco = Float.parseFloat(textPreco.getText());
-				int qtd = Integer.parseInt(textQtd.getText());
-				
-				
-				func.insertProduct(cod, nome, preco, qtd);
+				func.insertProduct(product, trsc);
 			}
 		});
 		btnInserir.setBounds(122, 211, 89, 23);

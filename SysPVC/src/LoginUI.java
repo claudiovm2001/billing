@@ -88,7 +88,9 @@ public class LoginUI {
 				User user = new User(textUsername.getText(), textPassword.getText());
 				
 				if(user.login()) {
-					lblHeader_2.setText("LOGADO COM SUCESSO!");
+					
+					InsertUI.main(null);
+					frame.dispose();
 				}else {
 					lblHeader_2.setText("Credenciais não reconhecidas!");
 				}

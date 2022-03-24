@@ -118,6 +118,8 @@ public class InsertUI {
 						    product.getPrice()+", "+
 						    product.getAmount());
 				}
+				
+				ReviewUI.main(null);
 			}
 		});
 		btnFinalizar.setBounds(215, 211, 89, 23);

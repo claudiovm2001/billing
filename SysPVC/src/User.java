@@ -1,11 +1,46 @@
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+
 public class User {
 	
 	private String username;
 	private String password;
 	
-	public static boolean Login(String login, String passcode) {
+	public User(String username, String password) {
+		this.username = username;
+		this.password = password;
+	}
+	
+	public boolean login() {
+		//CONECTAR
+		Connection c = null;
 		
-		if(login.equals("admin") && passcode.equals("passwd")) return true;
+		try {
+			c = DriverManager.getConnection(
+					"jdbc:postgresql://localhost:5432/postgres",
+			        "postgres", "0");
+			
+			c.setAutoCommit(false);
+			
+			//CONSULTAR
+			Statement stmt = null;
+			stmt = c.createStatement();
+			
+			ResultSet rs = stmt.executeQuery( "SELECT * FROM \"EMPLOYEES\";" );
+			while ( rs.next() ) {
+				if (this.username.equals(rs.getString("username")) && this.password.equals(rs.getString("password"))) {
+					return true;
+				}
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	    
 		
 		return false;
 	}

@@ -1,8 +1,11 @@
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
+import java.awt.FlowLayout;
+import java.awt.BorderLayout;
 import javax.swing.JLabel;
 import java.awt.Font;
+import javax.swing.SwingConstants;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
@@ -11,13 +14,13 @@ import java.awt.event.ActionEvent;
 public class LoginUI {
 
 	private JFrame frame;
-	private JTextField textField_login;
-	private JTextField textField_password;
+	private JTextField textUsername;
+	private JTextField textPassword;
 
 	/**
 	 * Launch the application.
 	 */
-	public static void begin() {
+	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -46,50 +49,52 @@ public class LoginUI {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
-		JLabel lblNewLabel = new JLabel("Caixa");
-		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 20));
-		lblNewLabel.setBounds(196, 53, 55, 25);
-		frame.getContentPane().add(lblNewLabel);
+		JLabel lblHeader = new JLabel("Login");
+		lblHeader.setHorizontalAlignment(SwingConstants.CENTER);
+		lblHeader.setFont(new Font("Tahoma", Font.BOLD, 20));
+		lblHeader.setBounds(186, 25, 55, 25);
+		frame.getContentPane().add(lblHeader);
 		
-		JLabel lblNewLabel_1 = new JLabel("Login:");
-		lblNewLabel_1.setBounds(140, 132, 46, 14);
-		frame.getContentPane().add(lblNewLabel_1);
+		JLabel lblHeader_2 = new JLabel("Informe suas credenciais.");
+		lblHeader_2.setHorizontalAlignment(SwingConstants.CENTER);
+		lblHeader_2.setFont(new Font("Tahoma", Font.BOLD, 12));
+		lblHeader_2.setBounds(144, 80, 154, 15);
+		frame.getContentPane().add(lblHeader_2);
 		
-		JLabel lblNewLabel_2 = new JLabel("Senha:");
-		lblNewLabel_2.setBounds(140, 157, 46, 14);
-		frame.getContentPane().add(lblNewLabel_2);
+		textUsername = new JTextField();
+		textUsername.setBounds(177, 151, 86, 20);
+		frame.getContentPane().add(textUsername);
+		textUsername.setColumns(10);
 		
-		textField_login = new JTextField();
-		textField_login.setBounds(181, 129, 86, 20);
-		frame.getContentPane().add(textField_login);
-		textField_login.setColumns(10);
+		textPassword = new JTextField();
+		textPassword.setBounds(177, 182, 86, 20);
+		frame.getContentPane().add(textPassword);
+		textPassword.setColumns(10);
 		
-		textField_password = new JTextField();
-		textField_password.setBounds(181, 157, 86, 20);
-		frame.getContentPane().add(textField_password);
-		textField_password.setColumns(10);
+		JLabel lblCredential_1 = new JLabel("username:");
+		lblCredential_1.setFont(new Font("Tahoma", Font.ITALIC, 11));
+		lblCredential_1.setBounds(112, 154, 55, 14);
+		frame.getContentPane().add(lblCredential_1);
 		
-		
-		JLabel lblTest = new JLabel("N\u00E3o logado");
-		lblTest.setFont(new Font("Tahoma", Font.BOLD, 11));
-		lblTest.setBounds(196, 215, 62, 14);
-		frame.getContentPane().add(lblTest);
-		
+		JLabel lblCredential_2 = new JLabel("password:");
+		lblCredential_2.setFont(new Font("Tahoma", Font.ITALIC, 11));
+		lblCredential_2.setBounds(112, 185, 55, 14);
+		frame.getContentPane().add(lblCredential_2);
 		
 		JButton btnSubmit = new JButton("Entrar");
 		btnSubmit.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				boolean success = User.Login(textField_login.getText(), textField_password.getText());
+				User user = new User(textUsername.getText(), textPassword.getText());
 				
-				if(success) {
-					lblTest.setText("Logado!");
+				if(user.login()) {
+					lblHeader_2.setText("LOGADO COM SUCESSO!");
 				}else {
-					lblTest.setText("Erro!");
+					lblHeader_2.setText("Credenciais não reconhecidas!");
 				}
 			}
 		});
-		btnSubmit.setBounds(277, 128, 89, 23);
+		btnSubmit.setBounds(273, 181, 89, 23);
 		frame.getContentPane().add(btnSubmit);
 	}
 

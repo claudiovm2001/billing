@@ -133,32 +133,40 @@ public class ReviewUI {
 		listItems_amount.setBounds(356, 149, 92, 389);
 		frmSyspvc.getContentPane().add(listItems_amount);
 		
+		
+		
+		//GRAVAR TRANSAÇÃO NO BANCO
 		JButton btnSubmit = new JButton("Finalizar");
 		btnSubmit.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
 				Connection c = null;
 			      
-			      try {
-			         Class.forName("org.postgresql.Driver");
-			         c = DriverManager
-			            .getConnection("jdbc:postgresql://localhost:5432/postgres",
-			            "postgres", "0");
-			         c.setAutoCommit(false);
+			    	try {
+			    		Class.forName("org.postgresql.Driver");
+			    		
+			    		c = DriverManager.getConnection(
+			    				"jdbc:postgresql://localhost:5432/postgres", "postgres","0"
+			            );
+			            c.setAutoCommit(false);
 			         
 			         
-			         PreparedStatement stmt = c.prepareStatement(
-			        		 "INSERT INTO \"TRANSACTIONS\" VALUES (?, ?)"
-			        		 );			        		 		
+			            PreparedStatement stmt = c.prepareStatement(
+			            		"INSERT INTO \"TRANSACTIONS\" VALUES (?, ?)"
+			        		    );			        		 		
 			         
-			         stmt.setString(1, "teste"); 
-			         stmt.setDouble(2, 1);
-			        
-			        		 
-			         stmt.executeUpdate(); 
+			            for (Product product : items) {
+			 			
+			            	stmt.setString(1, product.getName()); 
+					        stmt.setDouble(2, product.getPrice() * product.getAmount() );
+					        
+					        		 
+					         stmt.executeUpdate();
+			 		    }
+			 
 			         
-			         c.commit();
-			         c.close();
+			            c.commit();
+			            c.close();
 			         
 			      } catch (Exception e1) {
 			          e1.printStackTrace();
@@ -167,6 +175,9 @@ public class ReviewUI {
 			       }
 			}
 		});
+		
+		
+		
 		btnSubmit.setBounds(638, 359, 89, 23);
 		frmSyspvc.getContentPane().add(btnSubmit);
 		

@@ -12,6 +12,11 @@ import javax.swing.JList;
 import java.awt.Color;
 import javax.swing.JButton;
 import javax.swing.border.LineBorder;
+import java.awt.event.ActionListener;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.awt.event.ActionEvent;
 
 public class ReviewUI {
 
@@ -129,6 +134,39 @@ public class ReviewUI {
 		frmSyspvc.getContentPane().add(listItems_amount);
 		
 		JButton btnSubmit = new JButton("Finalizar");
+		btnSubmit.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				Connection c = null;
+			      
+			      try {
+			         Class.forName("org.postgresql.Driver");
+			         c = DriverManager
+			            .getConnection("jdbc:postgresql://localhost:5432/postgres",
+			            "postgres", "0");
+			         c.setAutoCommit(false);
+			         
+			         
+			         PreparedStatement stmt = c.prepareStatement(
+			        		 "INSERT INTO \"TRANSACTIONS\" VALUES (?, ?)"
+			        		 );			        		 		
+			         
+			         stmt.setString(1, "teste"); 
+			         stmt.setDouble(2, 1);
+			        
+			        		 
+			         stmt.executeUpdate(); 
+			         
+			         c.commit();
+			         c.close();
+			         
+			      } catch (Exception e1) {
+			          e1.printStackTrace();
+			          System.err.println(e1.getClass().getName()+": "+e1.getMessage());
+			          System.exit(0);
+			       }
+			}
+		});
 		btnSubmit.setBounds(638, 359, 89, 23);
 		frmSyspvc.getContentPane().add(btnSubmit);
 		

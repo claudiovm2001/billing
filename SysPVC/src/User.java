@@ -14,6 +14,10 @@ public class User {
 		this.password = password;
 	}
 	
+	public String getName() {
+		return this.username;
+	}
+	
 	public boolean login() {
 		//CONECTAR
 		Connection c = null;
@@ -21,7 +25,7 @@ public class User {
 		try {
 			c = DriverManager.getConnection(
 					"jdbc:postgresql://localhost:5432/postgres",
-			        "postgres", "0");
+			        "postgres", "30042001");
 			
 			c.setAutoCommit(false);
 			

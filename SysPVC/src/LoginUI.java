@@ -92,6 +92,8 @@ public class LoginUI {
 				
 				if(user.login()) {
 					
+					Main.currentUser = user.getName();
+					
 					InsertUI.main(null);
 					frmSyspvc.dispose();
 				}else {

@@ -40,7 +40,7 @@ public class InsertUI {
 	 * Create the application.
 	 */
 	public InsertUI() {
-		Employee func = new Employee("func1","senha1");
+		Employee func = new Employee(Main.currentUser,"");
 		Transaction trsc = new Transaction();
 		initialize(trsc, func);
 	}

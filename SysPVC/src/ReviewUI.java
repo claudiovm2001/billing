@@ -6,6 +6,8 @@ import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 import java.awt.Font;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import javax.swing.JList;
@@ -16,6 +18,8 @@ import java.awt.event.ActionListener;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.text.Format;
+import java.text.SimpleDateFormat;
 import java.awt.event.ActionEvent;
 
 public class ReviewUI {
@@ -23,6 +27,10 @@ public class ReviewUI {
 	private JFrame frmSyspvc;
 	
 	private ArrayList<Product> items;
+	
+	private Date date;
+	
+	private Format formatter;
 
 	/**
 	 * Launch the application.
@@ -48,6 +56,8 @@ public class ReviewUI {
 		
 		this.items = new ArrayList<Product>();
 		this.items = items;
+		
+		formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		
 		initialize();
 	}
@@ -140,25 +150,29 @@ public class ReviewUI {
 		btnSubmit.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
+				date = Calendar.getInstance().getTime();
+				
 				Connection c = null;
 			      
 			    	try {
 			    		Class.forName("org.postgresql.Driver");
 			    		
 			    		c = DriverManager.getConnection(
-			    				"jdbc:postgresql://localhost:5432/postgres", "postgres","0"
+			    				"jdbc:postgresql://localhost:5432/postgres", "postgres","30042001"
 			            );
 			            c.setAutoCommit(false);
 			         
 			         
 			            PreparedStatement stmt = c.prepareStatement(
-			            		"INSERT INTO \"TRANSACTIONS\" VALUES (?, ?)"
+			            		"INSERT INTO \"TRANSACTIONS\" VALUES (?, ?, ?, ?)"
 			        		    );			        		 		
 			         
 			            for (Product product : items) {
 			 			
 			            	stmt.setString(1, product.getName()); 
 					        stmt.setDouble(2, product.getPrice() * product.getAmount() );
+					        stmt.setString(3, Main.currentUser);
+					        stmt.setString(4, formatter.format(date));
 					        
 					        		 
 					         stmt.executeUpdate();

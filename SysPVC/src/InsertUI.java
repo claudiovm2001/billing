@@ -111,9 +111,9 @@ public class InsertUI {
 		btnFinalizar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				ArrayList<Product> items = trsc.getItems();
+				//ArrayList<Product> items = trsc.getItems();
 				
-				ReviewUI.main(items);
+				ReviewUI.main(trsc);
 			}
 		});
 		btnFinalizar.setBounds(215, 211, 89, 23);

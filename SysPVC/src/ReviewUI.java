@@ -26,21 +26,19 @@ public class ReviewUI {
 
 	private JFrame frmSyspvc;
 	
+	private Transaction transaction;
+	
 	private ArrayList<Product> items;
-	
-	private Date date;
-	
-	private Format formatter;
 
 	/**
 	 * Launch the application.
 	 */
-	public static void main(ArrayList<Product> items) {
+	public static void main(Transaction trsc) {
 		
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					ReviewUI window = new ReviewUI(items);
+					ReviewUI window = new ReviewUI(trsc);
 					window.frmSyspvc.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -52,12 +50,11 @@ public class ReviewUI {
 	/**
 	 * Create the application.
 	 */
-	public ReviewUI(ArrayList<Product> items) {
+	public ReviewUI(Transaction trsc) {
 		
-		this.items = new ArrayList<Product>();
-		this.items = items;
+		this.transaction = trsc;
 		
-		formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		this.items = transaction.getItems();
 		
 		initialize();
 	}
@@ -150,8 +147,6 @@ public class ReviewUI {
 		btnSubmit.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				date = Calendar.getInstance().getTime();
-				
 				Connection c = null;
 			      
 			    	try {
@@ -171,8 +166,8 @@ public class ReviewUI {
 			 			
 			            	stmt.setString(1, product.getName()); 
 					        stmt.setDouble(2, product.getPrice() * product.getAmount() );
-					        stmt.setString(3, Main.currentUser);
-					        stmt.setString(4, formatter.format(date));
+					        stmt.setString(3, transaction.getEmployee());
+					        stmt.setString(4, transaction.getTime());
 					        
 					        		 
 					         stmt.executeUpdate();

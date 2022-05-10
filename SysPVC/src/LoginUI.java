@@ -94,8 +94,13 @@ public class LoginUI {
 					
 					Main.currentUser = user.getName();
 					
-					InsertUI.main(null);
-					frmSyspvc.dispose();
+					if (user.getName().equals("admin")) {
+						AdminPanel.main(null);
+					}else {
+						InsertUI.main(null);
+						frmSyspvc.dispose();
+					}
+			
 				}else {
 					lblHeader_2.setText("Credenciais não reconhecidas!");
 					lblHeader_2.setForeground(Color.RED);

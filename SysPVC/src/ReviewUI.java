@@ -89,6 +89,7 @@ public class ReviewUI {
 		String[] prices = new String[this.items.size()];
 		String[] amounts = new String[this.items.size()];
 		
+		
 		int cont = 0;
 		
 		for (Product product : this.items) {
@@ -147,6 +148,8 @@ public class ReviewUI {
 		btnSubmit.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
+				transaction.setTime();
+				
 				Connection c = null;
 			      
 			    	try {
@@ -182,6 +185,8 @@ public class ReviewUI {
 			          System.err.println(e1.getClass().getName()+": "+e1.getMessage());
 			          System.exit(0);
 			       }
+			    	
+			    	System.out.println(transaction.getTime());
 			}
 		});
 		

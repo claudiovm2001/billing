@@ -1,21 +1,18 @@
 import java.awt.EventQueue;
-
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import java.awt.BorderLayout;
-import java.awt.Font;
-import javax.swing.JList;
-import java.awt.Color;
-import javax.swing.border.LineBorder;
-import java.awt.event.ComponentAdapter;
-import java.awt.event.ComponentEvent;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.awt.Rectangle;
+
+import javax.swing.JFrame;
+import java.awt.Dimension;
 import javax.swing.JPanel;
+import javax.swing.GroupLayout;
+import javax.swing.GroupLayout.Alignment;
+import javax.swing.JList;
+import javax.swing.JLabel;
+import java.awt.Font;
 
 public class AdminPanel {
 
@@ -49,69 +46,168 @@ public class AdminPanel {
 	 */
 	private void initialize() {
 		frame = new JFrame();
+		frame.setMinimumSize(new Dimension(640, 480));
 		frame.setBounds(100, 100, 450, 300);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
-		JLabel lblNewLabel = new JLabel("Hist\u00F3rico");
-		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 14));
-		lblNewLabel.setBounds(192, 21, 61, 14);
-		frame.getContentPane().add(lblNewLabel);
-		
 		String[] products;
+		String[] values;
+		String[] employees;
+		String[] dates;
+		
 		int size = 0;
 		
 		Connection c = null;
-		Statement stmt = null;
-		ResultSet rs;
 		
-		//recuperar do banco de dados
 		try {
 			c = DriverManager.getConnection(
 					"jdbc:postgresql://localhost:5432/postgres",
 			        "postgres", "30042001");
 			
-			c.setAutoCommit(false);
+			//c.setAutoCommit(false);
 			
 			//CONSULTAR
+			Statement stmt = null;
 			stmt = c.createStatement();
 			
-			rs = stmt.executeQuery( "SELECT * FROM \"TRANSACTIONS\";" );
-			
-			while(rs.next()) {
+			ResultSet rs = stmt.executeQuery( "SELECT * FROM \"TRANSACTIONS\";" );
+			while ( rs.next() ) {
 				++size;
 			}
-		}catch (SQLException e) {
+			c.close();
+			
+			
+		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
 		products = new String[size];
-		rs = null;
+		values = new String[size];
+		employees = new String[size];
+		dates = new String[size];
+		
+		int cont = 0;
+		
+		c = null;
 		
 		try {
+			c = DriverManager.getConnection(
+					"jdbc:postgresql://localhost:5432/postgres",
+			        "postgres", "30042001");
+			
+			
+			//CONSULTAR
+			Statement stmt = null;
 			stmt = c.createStatement();
-			rs = stmt.executeQuery( "SELECT * FROM \"TRANSACTIONS\";" );
 			
-			int cont = 0;
-			
-			while(rs.next()) {
+			ResultSet rs = stmt.executeQuery( "SELECT * FROM \"TRANSACTIONS\";" );
+			while ( rs.next() ) {
 				products[cont] = rs.getString("product");
+				values[cont] = "R$ "+rs.getString("value");
+				employees[cont] = rs.getString("employee");
+				dates[cont] = rs.getString("time");
+				
 				++cont;
 			}
-		} catch (SQLException e1) {
+			
+			c.close();
+			
+		} catch (SQLException e) {
 			// TODO Auto-generated catch block
-			e1.printStackTrace();
+			e.printStackTrace();
 		}
 		
+		
+		
 		JPanel panel = new JPanel();
-		panel.setBounds(10, 80, 215, 170);
+		panel.setBounds(10, 110, 158, 320);
 		frame.getContentPane().add(panel);
 		
 		JList list = new JList(products);
-		panel.add(list);
-		list.setForeground(Color.CYAN);
-		list.setBorder(new LineBorder(new Color(0, 0, 0), 2));
-		list.setBackground(Color.RED);
+		GroupLayout gl_panel = new GroupLayout(panel);
+		gl_panel.setHorizontalGroup(
+			gl_panel.createParallelGroup(Alignment.LEADING)
+				.addComponent(list, GroupLayout.DEFAULT_SIZE, 168, Short.MAX_VALUE)
+		);
+		gl_panel.setVerticalGroup(
+			gl_panel.createParallelGroup(Alignment.LEADING)
+				.addComponent(list, GroupLayout.DEFAULT_SIZE, 331, Short.MAX_VALUE)
+		);
+		panel.setLayout(gl_panel);
+		
+		JPanel panel_1 = new JPanel();
+		panel_1.setBounds(178, 110, 113, 320);
+		frame.getContentPane().add(panel_1);
+		
+		JList list_1 = new JList(values);
+		GroupLayout gl_panel_1 = new GroupLayout(panel_1);
+		gl_panel_1.setHorizontalGroup(
+			gl_panel_1.createParallelGroup(Alignment.LEADING)
+				.addComponent(list_1, GroupLayout.DEFAULT_SIZE, 113, Short.MAX_VALUE)
+		);
+		gl_panel_1.setVerticalGroup(
+			gl_panel_1.createParallelGroup(Alignment.LEADING)
+				.addComponent(list_1, GroupLayout.DEFAULT_SIZE, 331, Short.MAX_VALUE)
+		);
+		panel_1.setLayout(gl_panel_1);
+		
+		JPanel panel_2 = new JPanel();
+		panel_2.setBounds(301, 110, 153, 320);
+		frame.getContentPane().add(panel_2);
+		
+		JList list_2 = new JList(employees);
+		GroupLayout gl_panel_2 = new GroupLayout(panel_2);
+		gl_panel_2.setHorizontalGroup(
+			gl_panel_2.createParallelGroup(Alignment.LEADING)
+				.addComponent(list_2, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 153, Short.MAX_VALUE)
+		);
+		gl_panel_2.setVerticalGroup(
+			gl_panel_2.createParallelGroup(Alignment.LEADING)
+				.addComponent(list_2, GroupLayout.DEFAULT_SIZE, 331, Short.MAX_VALUE)
+		);
+		panel_2.setLayout(gl_panel_2);
+		
+		JPanel panel_3 = new JPanel();
+		panel_3.setBounds(464, 110, 150, 320);
+		frame.getContentPane().add(panel_3);
+		
+		JList list_3 = new JList(dates);
+		GroupLayout gl_panel_3 = new GroupLayout(panel_3);
+		gl_panel_3.setHorizontalGroup(
+			gl_panel_3.createParallelGroup(Alignment.LEADING)
+				.addComponent(list_3, GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
+		);
+		gl_panel_3.setVerticalGroup(
+			gl_panel_3.createParallelGroup(Alignment.LEADING)
+				.addComponent(list_3, GroupLayout.DEFAULT_SIZE, 320, Short.MAX_VALUE)
+		);
+		panel_3.setLayout(gl_panel_3);
+		
+		JLabel lblNewLabel = new JLabel("Produto");
+		lblNewLabel.setFont(new Font("Tahoma", Font.ITALIC, 14));
+		lblNewLabel.setBounds(10, 85, 57, 14);
+		frame.getContentPane().add(lblNewLabel);
+		
+		JLabel lblValor = new JLabel("Valor");
+		lblValor.setFont(new Font("Tahoma", Font.ITALIC, 14));
+		lblValor.setBounds(178, 87, 50, 14);
+		frame.getContentPane().add(lblValor);
+		
+		JLabel lblResponsvel = new JLabel("Respons\u00E1vel");
+		lblResponsvel.setFont(new Font("Tahoma", Font.ITALIC, 14));
+		lblResponsvel.setBounds(301, 85, 93, 14);
+		frame.getContentPane().add(lblResponsvel);
+		
+		JLabel lblHora = new JLabel("Hora");
+		lblHora.setFont(new Font("Tahoma", Font.ITALIC, 14));
+		lblHora.setBounds(464, 87, 50, 14);
+		frame.getContentPane().add(lblHora);
+		
+		JLabel lblNewLabel_1 = new JLabel("Hist\u00F3rico");
+		lblNewLabel_1.setFont(new Font("Tahoma", Font.BOLD, 16));
+		lblNewLabel_1.setBounds(258, 38, 72, 14);
+		frame.getContentPane().add(lblNewLabel_1);
 	}
 }

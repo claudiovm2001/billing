@@ -40,6 +40,7 @@ public class User {
 			ResultSet rs = stmt.executeQuery( "SELECT * FROM \"EMPLOYEES\";" );
 			while ( rs.next() ) {
 				if (this.username.equals(rs.getString("username")) && this.password.equals(rs.getString("password"))) {
+					c.close();
 					return true;
 				}
 			}

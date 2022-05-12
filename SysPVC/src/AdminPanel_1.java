@@ -13,6 +13,9 @@ import javax.swing.GroupLayout.Alignment;
 import javax.swing.JList;
 import javax.swing.JLabel;
 import java.awt.Font;
+import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class AdminPanel_1 {
 
@@ -129,5 +132,15 @@ public class AdminPanel_1 {
 				.addComponent(list, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 324, Short.MAX_VALUE)
 		);
 		panel.setLayout(gl_panel);
+		
+		JButton btnNewButton = new JButton("New button");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				AdminPanel.main(null);
+				frame.dispose();
+			}
+		});
+		btnNewButton.setBounds(10, 11, 89, 23);
+		frame.getContentPane().add(btnNewButton);
 	}
 }

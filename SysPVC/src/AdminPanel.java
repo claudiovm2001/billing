@@ -13,6 +13,10 @@ import javax.swing.GroupLayout.Alignment;
 import javax.swing.JList;
 import javax.swing.JLabel;
 import java.awt.Font;
+import javax.swing.JToggleButton;
+import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class AdminPanel {
 
@@ -209,5 +213,15 @@ public class AdminPanel {
 		lblNewLabel_1.setFont(new Font("Tahoma", Font.BOLD, 16));
 		lblNewLabel_1.setBounds(258, 38, 72, 14);
 		frame.getContentPane().add(lblNewLabel_1);
+		
+		JButton btnNewButton = new JButton("New button");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				AdminPanel_1.main(null);
+				frame.dispose();
+			}
+		});
+		btnNewButton.setBounds(10, 11, 89, 23);
+		frame.getContentPane().add(btnNewButton);
 	}
 }

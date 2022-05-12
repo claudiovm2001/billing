@@ -15,6 +15,7 @@ import java.awt.event.ActionEvent;
 import java.awt.Color;
 import java.awt.Dimension;
 import javax.swing.JSpinner;
+import javax.swing.border.BevelBorder;
 
 public class InsertUI {
 
@@ -63,47 +64,47 @@ public class InsertUI {
 		lblHeader.setForeground(Color.BLUE);
 		lblHeader.setFont(new Font("Tahoma", Font.BOLD, 20));
 		lblHeader.setHorizontalAlignment(SwingConstants.CENTER);
-		lblHeader.setBounds(282, 35, 69, 20);
+		lblHeader.setBounds(284, 87, 69, 20);
 		frmSyspvc.getContentPane().add(lblHeader);
 		
 		JLabel lblHeader_2 = new JLabel("Informe os dados do produto.");
 		lblHeader_2.setFont(new Font("Tahoma", Font.BOLD, 12));
-		lblHeader_2.setBounds(218, 81, 187, 14);
+		lblHeader_2.setBounds(220, 133, 187, 14);
 		frmSyspvc.getContentPane().add(lblHeader_2);
 		
 		textCod = new JTextField();
-		textCod.setBounds(112, 184, 86, 20);
+		textCod.setBounds(115, 247, 86, 20);
 		frmSyspvc.getContentPane().add(textCod);
 		textCod.setColumns(10);
 		
 		textNome = new JTextField();
-		textNome.setBounds(252, 184, 257, 20);
+		textNome.setBounds(255, 247, 257, 20);
 		frmSyspvc.getContentPane().add(textNome);
 		textNome.setColumns(10);
 		
 		textPreco = new JTextField();
-		textPreco.setBounds(112, 232, 86, 20);
+		textPreco.setBounds(115, 295, 86, 20);
 		frmSyspvc.getContentPane().add(textPreco);
 		textPreco.setColumns(10);
 		
 		JLabel lblInput_1 = new JLabel("c\u00F3digo:");
 		lblInput_1.setFont(new Font("Tahoma", Font.ITALIC, 11));
-		lblInput_1.setBounds(113, 169, 46, 14);
+		lblInput_1.setBounds(116, 232, 46, 14);
 		frmSyspvc.getContentPane().add(lblInput_1);
 		
 		JLabel lblInput_2 = new JLabel("nome:");
 		lblInput_2.setFont(new Font("Tahoma", Font.ITALIC, 11));
-		lblInput_2.setBounds(252, 169, 46, 14);
+		lblInput_2.setBounds(255, 232, 46, 14);
 		frmSyspvc.getContentPane().add(lblInput_2);
 		
 		JLabel lblInput_3 = new JLabel("pre\u00E7o:");
 		lblInput_3.setFont(new Font("Tahoma", Font.ITALIC, 11));
-		lblInput_3.setBounds(113, 218, 46, 14);
+		lblInput_3.setBounds(116, 281, 46, 14);
 		frmSyspvc.getContentPane().add(lblInput_3);
 		
 		JLabel lblInput_4 = new JLabel("quantidade: X");
 		lblInput_4.setFont(new Font("Tahoma", Font.ITALIC, 11));
-		lblInput_4.setBounds(252, 235, 85, 14);
+		lblInput_4.setBounds(255, 298, 85, 14);
 		frmSyspvc.getContentPane().add(lblInput_4);
 		
 		JButton btnFinalizar = new JButton("Finalizar");
@@ -116,18 +117,18 @@ public class InsertUI {
 				frmSyspvc.dispose();
 			}
 		});
-		btnFinalizar.setBounds(265, 332, 89, 23);
+		btnFinalizar.setBounds(268, 395, 89, 23);
 		frmSyspvc.getContentPane().add(btnFinalizar);
 		
 		
 		JLabel lblNewLabel = new JLabel("R$");
 		lblNewLabel.setHorizontalAlignment(SwingConstants.RIGHT);
 		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 14));
-		lblNewLabel.setBounds(63, 233, 46, 14);
+		lblNewLabel.setBounds(66, 296, 46, 14);
 		frmSyspvc.getContentPane().add(lblNewLabel);
 		
 		JSpinner spinner = new JSpinner();
-		spinner.setBounds(323, 232, 46, 20);
+		spinner.setBounds(326, 295, 46, 20);
 		frmSyspvc.getContentPane().add(spinner);
 		
 		JButton btnInserir = new JButton("Inserir");
@@ -150,7 +151,15 @@ public class InsertUI {
 				spinner.setValue(0);
 			}
 		});
-		btnInserir.setBounds(420, 231, 89, 23);
+		btnInserir.setBounds(423, 294, 89, 23);
 		frmSyspvc.getContentPane().add(btnInserir);
+		
+		JLabel lblCurrent_user = new JLabel(trsc.getEmployee());
+		lblCurrent_user.setOpaque(true);
+		lblCurrent_user.setBackground(Color.GREEN);
+		lblCurrent_user.setBorder(new BevelBorder(BevelBorder.LOWERED, Color.CYAN, null, Color.CYAN, null));
+		lblCurrent_user.setFont(new Font("Tahoma", Font.ITALIC, 11));
+		lblCurrent_user.setBounds(521, 0, 103, 20);
+		frmSyspvc.getContentPane().add(lblCurrent_user);
 	}
 }

@@ -21,6 +21,7 @@ import java.sql.PreparedStatement;
 import java.text.Format;
 import java.text.SimpleDateFormat;
 import java.awt.event.ActionEvent;
+import javax.swing.border.BevelBorder;
 
 public class ReviewUI {
 
@@ -221,5 +222,13 @@ public class ReviewUI {
 		lblResult_value.setBorder(new LineBorder(Color.RED, 2));
 		lblResult_value.setBounds(535, 236, 192, 57);
 		frmSyspvc.getContentPane().add(lblResult_value);
+		
+		JLabel lblCurrent_user = new JLabel(transaction.getEmployee());
+		lblCurrent_user.setOpaque(true);
+		lblCurrent_user.setFont(new Font("Tahoma", Font.ITALIC, 11));
+		lblCurrent_user.setBorder(new BevelBorder(BevelBorder.LOWERED, Color.CYAN, null, Color.CYAN, null));
+		lblCurrent_user.setBackground(Color.GREEN);
+		lblCurrent_user.setBounds(681, 0, 103, 20);
+		frmSyspvc.getContentPane().add(lblCurrent_user);
 	}
 }

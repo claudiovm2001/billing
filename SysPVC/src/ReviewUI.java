@@ -18,6 +18,8 @@ import java.awt.event.ActionListener;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.Statement;
 import java.text.Format;
 import java.text.SimpleDateFormat;
 import java.awt.event.ActionEvent;
@@ -161,7 +163,15 @@ public class ReviewUI {
 			            );
 			            c.setAutoCommit(false);
 			         
-			         
+			            
+			            //ADQUIRIR ID DO FUNCIONÁRIO
+			            Statement stmt1 = null;
+						stmt1 = c.createStatement();
+						
+						ResultSet rs = stmt1.executeQuery( "SELECT * FROM \"EMPLOYEES\" WHERE \"username\" = '" +transaction.getEmployee()+"';" );
+						rs.next();
+			            //ADQUIRIR ID DO FUNCIONÁRIO
+			            
 			            PreparedStatement stmt = c.prepareStatement(
 			            		"INSERT INTO \"TRANSACTIONS\" VALUES (?, ?, ?, ?)"
 			        		    );			        		 		
@@ -170,7 +180,7 @@ public class ReviewUI {
 			 			
 			            	stmt.setString(1, product.getName()); 
 					        stmt.setDouble(2, product.getPrice() * product.getAmount() );
-					        stmt.setString(3, transaction.getEmployee());
+					        stmt.setString(3, Integer.toString(rs.getInt("id")));
 					        stmt.setString(4, transaction.getTime());
 					        
 					        		 

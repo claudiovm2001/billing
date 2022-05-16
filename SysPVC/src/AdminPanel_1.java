@@ -114,11 +114,11 @@ public class AdminPanel_1 {
 		
 		JLabel lblNewLabel_1 = new JLabel("Cadastros");
 		lblNewLabel_1.setFont(new Font("Tahoma", Font.BOLD, 16));
-		lblNewLabel_1.setBounds(245, 38, 103, 14);
+		lblNewLabel_1.setBounds(252, 44, 81, 14);
 		frame.getContentPane().add(lblNewLabel_1);
 		
 		JPanel panel = new JPanel();
-		panel.setBounds(215, 117, 160, 313);
+		panel.setBounds(215, 117, 160, 269);
 		frame.getContentPane().add(panel);
 		
 		JList list = new JList(employees);
@@ -129,7 +129,9 @@ public class AdminPanel_1 {
 		);
 		gl_panel.setVerticalGroup(
 			gl_panel.createParallelGroup(Alignment.LEADING)
-				.addComponent(list, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 324, Short.MAX_VALUE)
+				.addGroup(gl_panel.createSequentialGroup()
+					.addComponent(list, GroupLayout.PREFERRED_SIZE, 267, GroupLayout.PREFERRED_SIZE)
+					.addContainerGap(46, Short.MAX_VALUE))
 		);
 		panel.setLayout(gl_panel);
 		
@@ -142,5 +144,26 @@ public class AdminPanel_1 {
 		});
 		btnNewButton.setBounds(10, 11, 89, 23);
 		frame.getContentPane().add(btnNewButton);
+		
+		JButton btnNewButton_1 = new JButton("Novo");
+		btnNewButton_1.setBounds(31, 396, 89, 23);
+		frame.getContentPane().add(btnNewButton_1);
+		
+		JButton btnNewButton_2 = new JButton("Editar");
+		btnNewButton_2.setBounds(411, 279, 89, 23);
+		frame.getContentPane().add(btnNewButton_2);
+		
+		JButton btnNewButton_3 = new JButton("Excluir");
+		btnNewButton_3.setBounds(510, 279, 89, 23);
+		frame.getContentPane().add(btnNewButton_3);
+		
+		JLabel lblNewLabel = new JLabel("New label");
+		lblNewLabel.setBounds(468, 237, 46, 14);
+		frame.getContentPane().add(lblNewLabel);
+		
+		JLabel lblNewLabel_2 = new JLabel("Gerenciar");
+		lblNewLabel_2.setFont(new Font("Tahoma", Font.BOLD, 14));
+		lblNewLabel_2.setBounds(468, 191, 65, 14);
+		frame.getContentPane().add(lblNewLabel_2);
 	}
 }

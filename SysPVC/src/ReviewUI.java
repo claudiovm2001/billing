@@ -180,7 +180,7 @@ public class ReviewUI {
 			 			
 			            	stmt.setString(1, product.getName()); 
 					        stmt.setDouble(2, product.getPrice() * product.getAmount() );
-					        stmt.setString(3, Integer.toString(rs.getInt("id")));
+					        stmt.setInt(3, rs.getInt("id"));
 					        stmt.setString(4, transaction.getTime());
 					        
 					        		 

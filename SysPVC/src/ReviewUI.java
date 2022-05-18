@@ -20,6 +20,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.sql.Timestamp;
 import java.text.Format;
 import java.text.SimpleDateFormat;
 import java.awt.event.ActionEvent;
@@ -181,7 +182,7 @@ public class ReviewUI {
 			            	stmt.setString(1, product.getName()); 
 					        stmt.setDouble(2, product.getPrice() * product.getAmount() );
 					        stmt.setInt(3, rs.getInt("id"));
-					        stmt.setString(4, transaction.getTime());
+					        stmt.setTimestamp(4, Timestamp.valueOf(transaction.getTime()));
 					        
 					        		 
 					         stmt.executeUpdate();

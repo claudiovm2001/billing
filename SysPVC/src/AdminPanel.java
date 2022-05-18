@@ -4,6 +4,7 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.Timestamp;
 
 import javax.swing.JFrame;
 import java.awt.Dimension;
@@ -106,12 +107,14 @@ public class AdminPanel {
 			Statement stmt = null;
 			stmt = c.createStatement();
 			
-			ResultSet rs = stmt.executeQuery( "SELECT * FROM \"TRANSACTIONS\";" );
+			ResultSet rs = stmt.executeQuery( "SELECT * FROM \"TRANSACTIONS\" ORDER BY \"time\" DESC;" );
 			while ( rs.next() ) {
 				products[cont] = rs.getString("product");
 				values[cont] = "R$ "+rs.getString("value");
-				employees[cont] = rs.getString("employee");
-				dates[cont] = rs.getString("time");
+				//employees[cont] = rs.getString("employee");
+				
+				Timestamp s1 = rs.getTimestamp("time");
+				dates[cont] = s1.toString();
 				
 				++cont;
 			}
@@ -121,7 +124,8 @@ public class AdminPanel {
 			stmt = c.createStatement();
 			
 			rs = stmt.executeQuery( "SELECT \"EMPLOYEES\".\"username\" FROM \"TRANSACTIONS\", \"EMPLOYEES\" "
-					+ "WHERE \"EMPLOYEES\".\"id\"=\"TRANSACTIONS\".\"employee\";" );
+					+ "WHERE \"EMPLOYEES\".\"id\"=\"TRANSACTIONS\".\"employee\" "
+					+ "ORDER BY \"TRANSACTIONS\".\"time\" DESC;");
 			while ( rs.next() ) {
 				employees[cont] = rs.getString("username");
 				

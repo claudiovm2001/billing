@@ -116,6 +116,18 @@ public class AdminPanel {
 				++cont;
 			}
 			
+			//RESPONSÁVEIS:
+			cont = 0;
+			stmt = c.createStatement();
+			
+			rs = stmt.executeQuery( "SELECT \"EMPLOYEES\".\"username\" FROM \"TRANSACTIONS\", \"EMPLOYEES\" "
+					+ "WHERE \"EMPLOYEES\".\"id\"=\"TRANSACTIONS\".\"employee\";" );
+			while ( rs.next() ) {
+				employees[cont] = rs.getString("username");
+				
+				++cont;
+			}
+			
 			c.close();
 			
 		} catch (SQLException e) {

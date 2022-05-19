@@ -16,10 +16,13 @@ import java.awt.Font;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.event.ListSelectionListener;
+import javax.swing.event.ListSelectionEvent;
 
 public class AdminPanel_1 {
 
 	private JFrame frame;
+	private int employee_id;
 
 	/**
 	 * Launch the application.
@@ -121,7 +124,16 @@ public class AdminPanel_1 {
 		panel.setBounds(215, 117, 160, 269);
 		frame.getContentPane().add(panel);
 		
+		JLabel lblEmployee = new JLabel("New label");
+		lblEmployee.setBounds(468, 237, 46, 14);
+		frame.getContentPane().add(lblEmployee);
+		
 		JList list = new JList(employees);
+		list.addListSelectionListener(new ListSelectionListener() {
+			public void valueChanged(ListSelectionEvent e) {
+				lblEmployee.setText((String) list.getSelectedValue());
+			}
+		});
 		GroupLayout gl_panel = new GroupLayout(panel);
 		gl_panel.setHorizontalGroup(
 			gl_panel.createParallelGroup(Alignment.LEADING)
@@ -134,7 +146,7 @@ public class AdminPanel_1 {
 					.addContainerGap(46, Short.MAX_VALUE))
 		);
 		panel.setLayout(gl_panel);
-		
+				
 		JButton btnNewButton = new JButton("New button");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -149,17 +161,43 @@ public class AdminPanel_1 {
 		btnNewButton_1.setBounds(31, 396, 89, 23);
 		frame.getContentPane().add(btnNewButton_1);
 		
-		JButton btnNewButton_2 = new JButton("Editar");
-		btnNewButton_2.setBounds(411, 279, 89, 23);
-		frame.getContentPane().add(btnNewButton_2);
+		JButton btnEdit = new JButton("Editar");
+		btnEdit.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				Connection c;
+				
+				try {
+					c = DriverManager.getConnection(
+							"jdbc:postgresql://localhost:5432/postgres",
+					        "postgres", "30042001");
+					
+					
+					//CONSULTAR
+					Statement stmt;
+					stmt = c.createStatement();
+				
+					ResultSet rs = stmt.executeQuery( "SELECT * FROM \"EMPLOYEES\" WHERE \"username\"= '"+lblEmployee.getText()+"';" );
+					rs.next();
+					employee_id = rs.getInt("id");
+					
+					
+					c.close();
+					
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				Admin_edit.main(lblEmployee.getText(), employee_id);
+			}
+		});
+		btnEdit.setBounds(411, 279, 89, 23);
+		frame.getContentPane().add(btnEdit);
 		
 		JButton btnNewButton_3 = new JButton("Excluir");
 		btnNewButton_3.setBounds(510, 279, 89, 23);
 		frame.getContentPane().add(btnNewButton_3);
 		
-		JLabel lblNewLabel = new JLabel("New label");
-		lblNewLabel.setBounds(468, 237, 46, 14);
-		frame.getContentPane().add(lblNewLabel);
 		
 		JLabel lblNewLabel_2 = new JLabel("Gerenciar");
 		lblNewLabel_2.setFont(new Font("Tahoma", Font.BOLD, 14));

@@ -17,8 +17,8 @@ import java.awt.event.ActionEvent;
 public class Admin_register extends JFrame {
 
 	private JPanel contentPane;
-	private JTextField textField;
-	private JTextField textField_1;
+	private JTextField textField_username;
+	private JTextField textField_password;
 
 	/**
 	 * Launch the application.
@@ -47,50 +47,21 @@ public class Admin_register extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		textField = new JTextField();
-		textField.setBounds(47, 119, 156, 20);
-		contentPane.add(textField);
-		textField.setColumns(10);
+		textField_username = new JTextField();
+		textField_username.setBounds(47, 119, 156, 20);
+		contentPane.add(textField_username);
+		textField_username.setColumns(10);
 		
-		textField_1 = new JTextField();
-		textField_1.setBounds(213, 119, 156, 20);
-		contentPane.add(textField_1);
-		textField_1.setColumns(10);
+		textField_password = new JTextField();
+		textField_password.setBounds(213, 119, 156, 20);
+		contentPane.add(textField_password);
+		textField_password.setColumns(10);
 		
 		JButton btnNewButton = new JButton("New button");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				Connection c = null;
-			      
-		    	try {
-		    		Class.forName("org.postgresql.Driver");
-		    		
-		    		c = DriverManager.getConnection(
-		    				"jdbc:postgresql://localhost:5432/postgres", "postgres","30042001"
-		            );
-		            c.setAutoCommit(false);					
-					
-		            
-		            PreparedStatement stmt = c.prepareStatement(
-		            		"INSERT INTO \"EMPLOYEES\" (\"username\", \"password\") VALUES (?, ?)"
-		        		    );			        		 		
-		         
-		            stmt.setString(1, textField.getText()); 
-			        stmt.setString(2, textField_1.getText());
-				        
-				        		 
-				    stmt.executeUpdate();
-		 
-		         
-		            c.commit();
-		            c.close();
-		         
-		      } catch (Exception e1) {
-		          e1.printStackTrace();
-		          System.err.println(e1.getClass().getName()+": "+e1.getMessage());
-		          System.exit(0);
-		       }
+				Admin.registerEmployee(textField_username.getText(), textField_password.getText());
 		    	
 				
 			}

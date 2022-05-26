@@ -16,8 +16,8 @@ import java.awt.event.ActionEvent;
 public class Admin_edit extends JFrame {
 
 	private JPanel contentPane;
-	private JTextField textField;
-	private JTextField textField_1;
+	private JTextField textField_name;
+	private JTextField textField_passwd;
 
 	/**
 	 * Launch the application.
@@ -50,52 +50,21 @@ public class Admin_edit extends JFrame {
 		lblNewLabel.setBounds(196, 110, 46, 14);
 		contentPane.add(lblNewLabel);
 		
-		textField = new JTextField();
-		textField.setBounds(124, 167, 86, 20);
-		contentPane.add(textField);
-		textField.setColumns(10);
+		textField_name = new JTextField();
+		textField_name.setBounds(124, 167, 86, 20);
+		contentPane.add(textField_name);
+		textField_name.setColumns(10);
 		
-		textField_1 = new JTextField();
-		textField_1.setBounds(233, 167, 86, 20);
-		contentPane.add(textField_1);
-		textField_1.setColumns(10);
+		textField_passwd = new JTextField();
+		textField_passwd.setBounds(233, 167, 86, 20);
+		contentPane.add(textField_passwd);
+		textField_passwd.setColumns(10);
 		
 		JButton btnUpdate = new JButton("Salvar");
 		btnUpdate.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				Connection c = null;
-			      
-		    	try {
-		    		Class.forName("org.postgresql.Driver");
-		    		
-		    		c = DriverManager.getConnection(
-		    				"jdbc:postgresql://localhost:5432/postgres", "postgres","30042001"
-		            );
-		            c.setAutoCommit(false);					
-					
-		            
-		            PreparedStatement stmt = c.prepareStatement(
-		            		"UPDATE \"EMPLOYEES\""
-		            		+ "SET \"username\" = ?, \"password\" = ?"
-		            		+ "WHERE \"id\"= "+id
-		        		    );			        		 		
-		         
-		            stmt.setString(1, textField.getText()); 
-			        stmt.setString(2, textField_1.getText());
-				        
-				        		 
-				    stmt.executeUpdate();
-		 
-		         
-		            c.commit();
-		            c.close();
-		         
-		      } catch (Exception e1) {
-		          e1.printStackTrace();
-		          System.err.println(e1.getClass().getName()+": "+e1.getMessage());
-		          System.exit(0);
-		       }
+				Admin.updateEmployee(id, textField_name.getText(), textField_passwd.getText());
 				
 			}
 		});

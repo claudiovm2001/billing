@@ -199,48 +199,7 @@ public class AdminPanel_1 {
 		btnDelete.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				Connection c = null;
-			      
-		    	try {
-		    		Class.forName("org.postgresql.Driver");
-		    		
-		    		c = DriverManager.getConnection(
-		    				"jdbc:postgresql://localhost:5432/postgres", "postgres","30042001"
-		            );
-		            c.setAutoCommit(false);
-		            
-		        //CONSULTAR
-				Statement stmt;
-				stmt = c.createStatement();
-				
-				ResultSet rs = stmt.executeQuery( "SELECT * FROM \"EMPLOYEES\" WHERE \"username\"= '"+lblEmployee.getText()+"';" );
-				rs.next();
-				employee_id = rs.getInt("id");
-					
-		            
-		        PreparedStatement stmt1 = c.prepareStatement(
-		            "DELETE FROM \"TRANSACTIONS\" WHERE \"employee\" = "+employee_id
-		        );			        
-				        		 
-				stmt1.executeUpdate();		 
-		         
-		        c.commit();
-		        
-		        PreparedStatement stmt2 = c.prepareStatement(
-			            "DELETE FROM \"EMPLOYEES\" WHERE \"id\" = "+employee_id
-			        );			        
-					        		 
-				stmt2.executeUpdate();		 
-			         
-			    c.commit();
-		        
-		        c.close();
-		         
-		      } catch (Exception e1) {
-		          e1.printStackTrace();
-		          System.err.println(e1.getClass().getName()+": "+e1.getMessage());
-		          System.exit(0);
-		       }
+				Admin.removeEmployee(lblEmployee.getText());
 				
 			}
 		});

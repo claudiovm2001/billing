@@ -1,6 +1,7 @@
 import java.awt.EventQueue;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -194,9 +195,57 @@ public class AdminPanel_1 {
 		btnEdit.setBounds(411, 279, 89, 23);
 		frame.getContentPane().add(btnEdit);
 		
-		JButton btnNewButton_3 = new JButton("Excluir");
-		btnNewButton_3.setBounds(510, 279, 89, 23);
-		frame.getContentPane().add(btnNewButton_3);
+		JButton btnDelete = new JButton("Excluir");
+		btnDelete.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				Connection c = null;
+			      
+		    	try {
+		    		Class.forName("org.postgresql.Driver");
+		    		
+		    		c = DriverManager.getConnection(
+		    				"jdbc:postgresql://localhost:5432/postgres", "postgres","30042001"
+		            );
+		            c.setAutoCommit(false);
+		            
+		        //CONSULTAR
+				Statement stmt;
+				stmt = c.createStatement();
+				
+				ResultSet rs = stmt.executeQuery( "SELECT * FROM \"EMPLOYEES\" WHERE \"username\"= '"+lblEmployee.getText()+"';" );
+				rs.next();
+				employee_id = rs.getInt("id");
+					
+		            
+		        PreparedStatement stmt1 = c.prepareStatement(
+		            "DELETE FROM \"TRANSACTIONS\" WHERE \"employee\" = "+employee_id
+		        );			        
+				        		 
+				stmt1.executeUpdate();		 
+		         
+		        c.commit();
+		        
+		        PreparedStatement stmt2 = c.prepareStatement(
+			            "DELETE FROM \"EMPLOYEES\" WHERE \"id\" = "+employee_id
+			        );			        
+					        		 
+				stmt2.executeUpdate();		 
+			         
+			    c.commit();
+		        
+		        c.close();
+		         
+		      } catch (Exception e1) {
+		          e1.printStackTrace();
+		          System.err.println(e1.getClass().getName()+": "+e1.getMessage());
+		          System.exit(0);
+		       }
+				
+			}
+		});
+		btnDelete.setBounds(510, 279, 89, 23);
+		frame.getContentPane().add(btnDelete);
 		
 		
 		JLabel lblNewLabel_2 = new JLabel("Gerenciar");

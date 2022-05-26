@@ -19,6 +19,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.event.ListSelectionEvent;
+import java.awt.Color;
 
 public class AdminPanel_1 {
 
@@ -153,15 +154,16 @@ public class AdminPanel_1 {
 		);
 		panel.setLayout(gl_panel);
 				
-		JButton btnNewButton = new JButton("New button");
-		btnNewButton.addActionListener(new ActionListener() {
+		JButton btnSwitch = new JButton("Hist\u00F3rico");
+		btnSwitch.setForeground(Color.GREEN);
+		btnSwitch.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				AdminPanel.main(null);
 				frame.dispose();
 			}
 		});
-		btnNewButton.setBounds(10, 11, 89, 23);
-		frame.getContentPane().add(btnNewButton);
+		btnSwitch.setBounds(10, 11, 89, 23);
+		frame.getContentPane().add(btnSwitch);
 		
 		JButton btnRegister = new JButton("Novo");
 		btnRegister.addActionListener(new ActionListener() {

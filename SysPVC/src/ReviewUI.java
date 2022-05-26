@@ -197,7 +197,10 @@ public class ReviewUI {
 			          System.err.println(e1.getClass().getName()+": "+e1.getMessage());
 			          System.exit(0);
 			       }
+			    
 			    	
+			    	InsertUI.main(null);
+			    	frmSyspvc.dispose();
 			}
 		});
 		
@@ -207,6 +210,12 @@ public class ReviewUI {
 		frmSyspvc.getContentPane().add(btnSubmit);
 		
 		JButton btnCancel = new JButton("Cancelar");
+		btnCancel.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				InsertUI.main(null);
+				frmSyspvc.dispose();
+			}
+		});
 		btnCancel.setBounds(535, 359, 89, 23);
 		frmSyspvc.getContentPane().add(btnCancel);
 		

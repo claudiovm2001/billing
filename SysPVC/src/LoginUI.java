@@ -11,12 +11,14 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.Color;
+import javax.swing.JPasswordField;
 
 public class LoginUI {
 
 	private JFrame frmSyspvc;
 	private JTextField textUsername;
 	private JTextField textPassword;
+	private JPasswordField passwordField;
 
 	/**
 	 * Launch the application.
@@ -88,7 +90,7 @@ public class LoginUI {
 		btnSubmit.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				User user = new User(textUsername.getText(), textPassword.getText());
+				User user = new User(textUsername.getText(), String.valueOf(passwordField.getPassword()));
 				
 				if(user.login()) {
 					
@@ -96,6 +98,7 @@ public class LoginUI {
 					
 					if (user.getName().equals("admin")) {
 						AdminPanel.main(null);
+						frmSyspvc.dispose();
 					}else {
 						InsertUI.main(null);
 						frmSyspvc.dispose();
@@ -109,6 +112,9 @@ public class LoginUI {
 		});
 		btnSubmit.setBounds(273, 181, 89, 23);
 		frmSyspvc.getContentPane().add(btnSubmit);
+		
+		passwordField = new JPasswordField();
+		passwordField.setBounds(177, 213, 86, 15);
+		frmSyspvc.getContentPane().add(passwordField);
 	}
-
 }

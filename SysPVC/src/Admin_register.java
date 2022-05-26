@@ -26,6 +26,9 @@ public class Admin_register extends JFrame {
 	private JLabel lblNewLabel_1;
 	private JLabel lblNewLabel_2;
 	private JLabel lblNewLabel_3;
+	private JButton btnCancel;
+	
+	private Admin_register self = this;
 
 	/**
 	 * Launch the application.
@@ -96,6 +99,15 @@ public class Admin_register extends JFrame {
 		lblNewLabel_3.setFont(new Font("Tahoma", Font.ITALIC, 11));
 		lblNewLabel_3.setBounds(243, 142, 46, 14);
 		contentPane.add(lblNewLabel_3);
+		
+		btnCancel = new JButton("Cancelar");
+		btnCancel.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				self.dispose();
+			}
+		});
+		btnCancel.setBounds(236, 227, 89, 23);
+		contentPane.add(btnCancel);
 		
 	}
 }

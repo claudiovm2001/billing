@@ -18,6 +18,7 @@ import javax.swing.JToggleButton;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.Color;
 
 public class AdminPanel {
 
@@ -230,14 +231,15 @@ public class AdminPanel {
 		lblNewLabel_1.setBounds(258, 38, 72, 14);
 		frame.getContentPane().add(lblNewLabel_1);
 		
-		JButton btnNewButton = new JButton("New button");
-		btnNewButton.addActionListener(new ActionListener() {
+		JButton btnSwitch = new JButton("Cadastros");
+		btnSwitch.setForeground(Color.GREEN);
+		btnSwitch.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				AdminPanel_1.main(null);
 				frame.dispose();
 			}
 		});
-		btnNewButton.setBounds(10, 11, 89, 23);
-		frame.getContentPane().add(btnNewButton);
+		btnSwitch.setBounds(10, 11, 89, 23);
+		frame.getContentPane().add(btnSwitch);
 	}
 }

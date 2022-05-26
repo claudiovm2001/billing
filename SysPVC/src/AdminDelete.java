@@ -15,6 +15,7 @@ import java.awt.event.ActionEvent;
 public class AdminDelete extends JFrame {
 
 	private JPanel contentPane;
+	private AdminDelete self = this;
 
 	/**
 	 * Launch the application.
@@ -77,6 +78,11 @@ public class AdminDelete extends JFrame {
 		contentPane.add(btnConfirm);
 		
 		JButton btnCancel = new JButton("Cancelar");
+		btnCancel.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				self.dispose();
+			}
+		});
 		btnCancel.setBounds(120, 215, 89, 23);
 		contentPane.add(btnCancel);
 	}

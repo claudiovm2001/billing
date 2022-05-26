@@ -20,6 +20,8 @@ public class Admin_edit extends JFrame {
 	private JPanel contentPane;
 	private JTextField textField_name;
 	private JTextField textField_passwd;
+	
+	private Admin_edit self = this;
 
 	/**
 	 * Launch the application.
@@ -50,7 +52,7 @@ public class Admin_edit extends JFrame {
 		
 		JLabel lblNewLabel = new JLabel(selectedEmployee);
 		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 11));
-		lblNewLabel.setBounds(227, 86, 46, 14);
+		lblNewLabel.setBounds(227, 86, 186, 14);
 		contentPane.add(lblNewLabel);
 		
 		textField_name = new JTextField();
@@ -98,5 +100,14 @@ public class Admin_edit extends JFrame {
 		lblNewLabel_5.setForeground(Color.BLUE);
 		lblNewLabel_5.setBounds(136, 145, 186, 14);
 		contentPane.add(lblNewLabel_5);
+		
+		JButton btnCancel = new JButton("Cancelar");
+		btnCancel.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				self.dispose();
+			}
+		});
+		btnCancel.setBounds(236, 227, 89, 23);
+		contentPane.add(btnCancel);
 	}
 }

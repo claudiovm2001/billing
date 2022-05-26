@@ -22,8 +22,9 @@ import javax.swing.event.ListSelectionEvent;
 
 public class AdminPanel_1 {
 
-	private JFrame frame;
+	public JFrame frame;
 	private int employee_id;
+	private AdminPanel_1 self = this;
 
 	/**
 	 * Launch the application.
@@ -47,22 +48,39 @@ public class AdminPanel_1 {
 	public AdminPanel_1() {
 		initialize();
 	}
-
+	
 	/**
 	 * Initialize the contents of the frame.
 	 */
-	private void initialize() {
+	public void initialize() {
 		frame = new JFrame();
 		frame.setMinimumSize(new Dimension(640, 480));
 		frame.setBounds(100, 100, 450, 300);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
+		
+		
+		JLabel lblNewLabel_1 = new JLabel("Cadastros");
+		lblNewLabel_1.setFont(new Font("Tahoma", Font.BOLD, 16));
+		lblNewLabel_1.setBounds(252, 44, 81, 14);
+		frame.getContentPane().add(lblNewLabel_1);
+		
+		JPanel panel = new JPanel();
+		panel.setBounds(215, 117, 160, 269);
+		frame.getContentPane().add(panel);
+		
+		JLabel lblEmployee = new JLabel("New label");
+		lblEmployee.setBounds(468, 237, 46, 14);
+		frame.getContentPane().add(lblEmployee);
+		
+		//JList list = new JList();
 		String[] employees;
 		
 		int size = 0;
 		
-		Connection c = null;
+		
+		Connection c;
 		
 		try {
 			c = DriverManager.getConnection(
@@ -72,7 +90,7 @@ public class AdminPanel_1 {
 			//c.setAutoCommit(false);
 			
 			//CONSULTAR
-			Statement stmt = null;
+			Statement stmt;
 			stmt = c.createStatement();
 			
 			ResultSet rs = stmt.executeQuery( "SELECT * FROM \"EMPLOYEES\";" );
@@ -91,7 +109,6 @@ public class AdminPanel_1 {
 		
 		int cont = 0;
 		
-		c = null;
 		
 		try {
 			c = DriverManager.getConnection(
@@ -100,7 +117,7 @@ public class AdminPanel_1 {
 			
 			
 			//CONSULTAR
-			Statement stmt = null;
+			Statement stmt;
 			stmt = c.createStatement();
 			
 			ResultSet rs = stmt.executeQuery( "SELECT * FROM \"EMPLOYEES\";" );
@@ -116,20 +133,8 @@ public class AdminPanel_1 {
 			e.printStackTrace();
 		}
 		
-		JLabel lblNewLabel_1 = new JLabel("Cadastros");
-		lblNewLabel_1.setFont(new Font("Tahoma", Font.BOLD, 16));
-		lblNewLabel_1.setBounds(252, 44, 81, 14);
-		frame.getContentPane().add(lblNewLabel_1);
-		
-		JPanel panel = new JPanel();
-		panel.setBounds(215, 117, 160, 269);
-		frame.getContentPane().add(panel);
-		
-		JLabel lblEmployee = new JLabel("New label");
-		lblEmployee.setBounds(468, 237, 46, 14);
-		frame.getContentPane().add(lblEmployee);
-		
 		JList list = new JList(employees);
+		
 		list.addListSelectionListener(new ListSelectionListener() {
 			public void valueChanged(ListSelectionEvent e) {
 				lblEmployee.setText((String) list.getSelectedValue());
@@ -158,9 +163,14 @@ public class AdminPanel_1 {
 		btnNewButton.setBounds(10, 11, 89, 23);
 		frame.getContentPane().add(btnNewButton);
 		
-		JButton btnNewButton_1 = new JButton("Novo");
-		btnNewButton_1.setBounds(31, 396, 89, 23);
-		frame.getContentPane().add(btnNewButton_1);
+		JButton btnRegister = new JButton("Novo");
+		btnRegister.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Admin_register.main(self);
+			}
+		});
+		btnRegister.setBounds(31, 396, 89, 23);
+		frame.getContentPane().add(btnRegister);
 		
 		JButton btnEdit = new JButton("Editar");
 		btnEdit.addActionListener(new ActionListener() {
@@ -189,7 +199,7 @@ public class AdminPanel_1 {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
-				Admin_edit.main(lblEmployee.getText(), employee_id);
+				Admin_edit.main(lblEmployee.getText(), employee_id, self);
 			}
 		});
 		btnEdit.setBounds(411, 279, 89, 23);
@@ -199,7 +209,8 @@ public class AdminPanel_1 {
 		btnDelete.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				Admin.removeEmployee(lblEmployee.getText());
+				AdminDelete.main(lblEmployee.getText(), self);
+				
 				
 			}
 		});
@@ -212,4 +223,5 @@ public class AdminPanel_1 {
 		lblNewLabel_2.setBounds(468, 191, 65, 14);
 		frame.getContentPane().add(lblNewLabel_2);
 	}
+	
 }
